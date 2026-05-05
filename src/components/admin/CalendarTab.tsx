@@ -53,43 +53,43 @@ export const CalendarTab = () => {
 
   return (
     <div className="grid lg:grid-cols-12 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="lg:col-span-8 bg-white rounded-[40px] border border-deep/5 shadow-sm overflow-hidden">
-        <div className="p-8 border-b border-deep/5 flex justify-between items-center">
+      <div className="lg:col-span-8 bg-white rounded-[32px] md:rounded-[40px] border border-deep/5 shadow-sm overflow-hidden">
+        <div className="p-6 md:p-8 border-b border-deep/5 flex justify-between items-center">
           <div>
-            <h3 className="text-xl font-display font-black text-deep">
+            <h3 className="text-lg md:text-xl font-display font-black text-deep">
               {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
             </h3>
-            <p className="text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Schedule Overview</p>
+            <p className="text-[10px] md:text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Schedule Overview</p>
           </div>
           <div className="flex gap-2">
-            <button onClick={prevMonth} className="p-3 bg-bg-light hover:bg-primary hover:text-white rounded-2xl transition-all"><ChevronLeft size={20} /></button>
-            <button onClick={nextMonth} className="p-3 bg-bg-light hover:bg-primary hover:text-white rounded-2xl transition-all"><ChevronRight size={20} /></button>
+            <button onClick={prevMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronLeft size={18} className="md:size-[20px]" /></button>
+            <button onClick={nextMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronRight size={18} className="md:size-[20px]" /></button>
           </div>
         </div>
 
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <div className="grid grid-cols-7 mb-6">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
               <div key={d} className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-deep/30">{d}</div>
             ))}
           </div>
-          <div className="grid grid-cols-7 gap-3">
+          <div className="grid grid-cols-7 gap-1 md:gap-3">
             {daysInMonth.map((d, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedDate(d.date)}
                 className={cn(
-                  "aspect-square rounded-3xl flex flex-col items-center justify-center relative transition-all group",
+                  "aspect-square rounded-2xl md:rounded-3xl flex flex-col items-center justify-center relative transition-all group",
                   !d.currentMonth ? "opacity-20" : "",
                   selectedDate === d.date 
-                    ? "bg-primary text-white shadow-xl shadow-primary/20 scale-110 z-10" 
+                    ? "bg-primary text-white shadow-xl shadow-primary/20 scale-105 md:scale-110 z-10" 
                     : "hover:bg-bg-light"
                 )}
               >
-                <span className="text-sm font-black">{d.day}</span>
+                <span className="text-xs md:text-sm font-black">{d.day}</span>
                 {hasEvent(d.date) && (
                   <div className={cn(
-                    "absolute bottom-3 w-1.5 h-1.5 rounded-full",
+                    "absolute bottom-2 md:bottom-3 w-1 md:w-1.5 h-1 md:h-1.5 rounded-full",
                     selectedDate === d.date ? "bg-white" : "bg-primary"
                   )} />
                 )}
@@ -100,12 +100,12 @@ export const CalendarTab = () => {
       </div>
 
       <div className="lg:col-span-4 space-y-6">
-        <div className="bg-white p-8 rounded-[40px] border border-deep/5 shadow-sm min-h-[500px] flex flex-col">
-          <div className="mb-8">
-            <h3 className="text-xl font-display font-black text-deep">
+        <div className="bg-white p-6 md:p-8 rounded-[32px] md:rounded-[40px] border border-deep/5 shadow-sm min-h-[400px] md:min-h-[500px] flex flex-col">
+          <div className="mb-6 md:mb-8">
+            <h3 className="text-lg md:text-xl font-display font-black text-deep">
                {new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
             </h3>
-            <p className="text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Daily Agenda</p>
+            <p className="text-[10px] md:text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Daily Agenda</p>
           </div>
 
           <div className="flex-1 space-y-4">

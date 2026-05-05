@@ -29,12 +29,12 @@ import { PatientSidebar } from './PatientSidebar';
 import { Visit, Patient } from '../../types';
 
 const StatCard = ({ icon: Icon, label, value, color }: { icon: any, label: string, value: string | number, color: string }) => (
-  <div className="bg-white p-8 rounded-[32px] border border-deep/5 shadow-sm">
-    <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-6", color)}>
-      <Icon size={20} className="text-white" />
+  <div className="bg-white p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-deep/5 shadow-sm">
+    <div className={cn("w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6", color)}>
+      <Icon size={18} className="text-white md:size-[20px]" />
     </div>
-    <p className="text-[10px] font-black text-deep/30 uppercase tracking-[0.2em] mb-2">{label}</p>
-    <h3 className="text-3xl font-display font-black text-deep">{value}</h3>
+    <p className="text-[9px] md:text-[10px] font-black text-deep/30 uppercase tracking-[0.2em] mb-1 md:mb-2">{label}</p>
+    <h3 className="text-2xl md:text-3xl font-display font-black text-deep">{value}</h3>
   </div>
 );
 
@@ -107,15 +107,15 @@ export const DashboardTab = () => {
             </button>
           </div>
 
-          <div className="flex-1 overflow-x-auto">
+          <div className="flex-1 overflow-x-auto scrollbar-hide">
             <table className="w-full text-left">
               <thead className="bg-bg-light/50 text-[10px] font-black uppercase tracking-[0.2em] text-deep/40">
                 <tr>
-                  <th className="px-8 py-5">Patient Name</th>
-                  <th className="px-8 py-5">Complaint</th>
-                  <th className="px-8 py-5">Doctor</th>
-                  <th className="px-8 py-5">Status</th>
-                  <th className="px-8 py-5 text-right">Actions</th>
+                  <th className="px-4 md:px-8 py-5">Patient Name</th>
+                  <th className="hidden md:table-cell px-8 py-5">Complaint</th>
+                  <th className="hidden md:table-cell px-8 py-5">Doctor</th>
+                  <th className="px-4 md:px-8 py-5">Status</th>
+                  <th className="px-4 md:px-8 py-5 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-deep/5">
@@ -131,26 +131,26 @@ export const DashboardTab = () => {
                 ) : (
                   pendingVisits.map((visit) => (
                     <tr key={visit.id} className="hover:bg-bg-light/50 transition-colors group">
-                      <td className="px-8 py-5">
+                      <td className="px-4 md:px-8 py-5">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-bg-light flex items-center justify-center overflow-hidden">
+                          <div className="w-10 h-10 rounded-xl bg-bg-light flex items-center justify-center overflow-hidden shrink-0">
                              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${visit.patient?.name}`} alt="" />
                           </div>
-                          <div>
-                            <p className="text-sm font-black text-deep">{visit.patient?.name}</p>
+                          <div className="min-w-0">
+                            <p className="text-sm font-black text-deep truncate">{visit.patient?.name}</p>
                             <p className="text-[10px] font-bold text-deep/30">{visit.patient?.age} yrs • {visit.patient?.gender}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="hidden md:table-cell px-8 py-5">
                         <p className="text-xs font-bold text-deep/60 max-w-[200px] truncate">{visit.chief_complaint || 'General Checkup'}</p>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="hidden md:table-cell px-8 py-5">
                         <p className="text-xs font-bold text-deep/60">{visit.doctor}</p>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-4 md:px-8 py-5">
                         <span className={cn(
-                          "px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border",
+                          "px-2 md:px-3 py-1 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-wider border whitespace-nowrap",
                           visit.status === 'followup_pending' 
                             ? "bg-cyan-50 text-cyan-600 border-cyan-100" 
                             : "bg-amber-50 text-amber-600 border-amber-100"
@@ -158,29 +158,29 @@ export const DashboardTab = () => {
                           {visit.status === 'followup_pending' ? 'Follow-up' : 'Pending'}
                         </span>
                       </td>
-                       <td className="px-8 py-5 text-right">
-                        <div className="flex justify-end gap-2">
+                       <td className="px-4 md:px-8 py-5 text-right">
+                        <div className="flex justify-end gap-1 md:gap-2">
                            <button 
                              onClick={() => {
                                if (confirm('Are you sure you want to remove this patient from the pending list?')) {
                                  deleteVisit(visit.id);
                                }
                              }}
-                             className="p-2.5 bg-bg-light text-red-300 rounded-xl hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer"
+                             className="p-2 bg-bg-light text-red-300 rounded-lg md:rounded-xl hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer"
                            >
-                              <Trash2 size={14} />
+                              <Trash2 size={12} className="md:size-[14px]" />
                            </button>
                            <button 
                              onClick={() => setSelectedVisit(visit)}
-                             className="p-2.5 bg-bg-light text-deep/30 rounded-xl hover:text-primary transition-all cursor-pointer"
+                             className="p-2 bg-bg-light text-deep/30 rounded-lg md:rounded-xl hover:text-primary transition-all cursor-pointer"
                            >
-                              <Pencil size={14} />
+                              <Pencil size={12} className="md:size-[14px]" />
                            </button>
                            <button 
                              onClick={() => setSelectedVisit(visit)}
-                             className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-500 hover:text-white transition-all cursor-pointer"
+                             className="p-2 bg-emerald-50 text-emerald-600 rounded-lg md:rounded-xl hover:bg-emerald-500 hover:text-white transition-all cursor-pointer"
                            >
-                              <Check size={14} strokeWidth={3} />
+                              <Check size={12} strokeWidth={3} className="md:size-[14px]" />
                            </button>
                         </div>
                       </td>

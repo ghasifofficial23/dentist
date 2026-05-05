@@ -25,15 +25,15 @@ import {
 } from 'recharts';
 
 const MetricCard = ({ label, value, change, isPositive }: { label: string, value: string, change: string, isPositive: boolean }) => (
-  <div className="bg-white p-8 rounded-[40px] border border-deep/5 shadow-sm">
-    <p className="text-[10px] font-black text-deep/30 uppercase tracking-[0.2em] mb-4">{label}</p>
-    <div className="flex items-end justify-between">
-      <h3 className="text-4xl font-display font-black text-deep leading-none">{value}</h3>
+  <div className="bg-white p-6 md:p-8 rounded-[32px] md:rounded-[40px] border border-deep/5 shadow-sm">
+    <p className="text-[9px] md:text-[10px] font-black text-deep/30 uppercase tracking-[0.2em] mb-3 md:mb-4">{label}</p>
+    <div className="flex items-end justify-between gap-4">
+      <h3 className="text-2xl md:text-4xl font-display font-black text-deep leading-none break-all">{value}</h3>
       <div className={cn(
-        "flex items-center gap-1 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase",
+        "flex items-center gap-1 px-2 md:px-3 py-1 md:py-1.5 rounded-xl text-[8px] md:text-[10px] font-black uppercase shrink-0",
         isPositive ? "bg-emerald-50 text-emerald-500" : "bg-red-50 text-red-500"
       )}>
-        {isPositive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
+        {isPositive ? <ArrowUpRight size={12} className="md:size-[14px]" /> : <ArrowDownRight size={12} className="md:size-[14px]" />}
         {change}
       </div>
     </div>
@@ -78,24 +78,24 @@ export const RevenueTab = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <MetricCard label="Total Revenue" value={`Rs. ${totalRevenue.toLocaleString()}`} change="18%" isPositive={true} />
         <MetricCard label="Outstanding Balance" value={`Rs. ${unpaidBalance.toLocaleString()}`} change="4%" isPositive={false} />
         <MetricCard label="Avg. Ticket Size" value={`Rs. ${(totalRevenue / (visits.length || 1)).toFixed(0)}`} change="12%" isPositive={true} />
       </div>
 
       <div className="grid lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-8 bg-white p-10 rounded-[40px] border border-deep/5 shadow-sm">
-           <div className="flex justify-between items-center mb-12">
+        <div className="lg:col-span-8 bg-white p-6 md:p-10 rounded-[32px] md:rounded-[40px] border border-deep/5 shadow-sm">
+           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 md:mb-12">
               <div>
-                 <h3 className="text-2xl font-display font-black text-deep">Growth Overview</h3>
-                 <p className="text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Monthly performance tracking</p>
+                 <h3 className="text-xl md:text-2xl font-display font-black text-deep">Growth Overview</h3>
+                 <p className="text-[10px] font-bold text-deep/30 uppercase tracking-widest mt-1">Monthly performance tracking</p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-4">
                  {['Income', 'Forecast'].map(item => (
                    <div key={item} className="flex items-center gap-2">
                       <div className={cn("w-2 h-2 rounded-full", item === 'Income' ? 'bg-primary' : 'bg-bg-light')} />
-                      <span className="text-[10px] font-black uppercase text-deep/40 tracking-widest">{item}</span>
+                      <span className="text-[9px] font-black uppercase text-deep/40 tracking-widest">{item}</span>
                    </div>
                  ))}
               </div>
