@@ -181,12 +181,6 @@ export const AdminDashboard = () => {
                  />
                ))}
             </div>
-            <button 
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="hidden lg:flex p-3 bg-white border border-deep/5 rounded-2xl text-deep hover:bg-primary hover:text-white transition-all shadow-sm"
-            >
-              {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </header>
 
