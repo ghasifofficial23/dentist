@@ -31,7 +31,7 @@ import { Visit, Patient } from '../../types';
 const StatCard = ({ icon: Icon, label, value, color }: { icon: any, label: string, value: string | number, color: string }) => (
   <div className="bg-white p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-deep/5 shadow-sm">
     <div className={cn("w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6", color)}>
-      <Icon size={18} className="text-white md:size-[20px]" />
+      <Icon className="text-white size-4 md:size-5" />
     </div>
     <p className="text-[9px] md:text-[10px] font-black text-deep/30 uppercase tracking-[0.2em] mb-1 md:mb-2">{label}</p>
     <h3 className="text-2xl md:text-3xl font-display font-black text-deep">{value}</h3>
@@ -168,19 +168,19 @@ export const DashboardTab = () => {
                              }}
                              className="p-2 bg-bg-light text-red-300 rounded-lg md:rounded-xl hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer"
                            >
-                              <Trash2 size={12} className="md:size-[14px]" />
+                              <Trash2 className="size-3 md:size-3.5" />
                            </button>
                            <button 
                              onClick={() => setSelectedVisit(visit)}
                              className="p-2 bg-bg-light text-deep/30 rounded-lg md:rounded-xl hover:text-primary transition-all cursor-pointer"
                            >
-                              <Pencil size={12} className="md:size-[14px]" />
+                              <Pencil className="size-3 md:size-3.5" />
                            </button>
                            <button 
                              onClick={() => setSelectedVisit(visit)}
                              className="p-2 bg-emerald-50 text-emerald-600 rounded-lg md:rounded-xl hover:bg-emerald-500 hover:text-white transition-all cursor-pointer"
                            >
-                              <Check size={12} strokeWidth={3} className="md:size-[14px]" />
+                              <Check strokeWidth={3} className="size-3 md:size-3.5" />
                            </button>
                         </div>
                       </td>

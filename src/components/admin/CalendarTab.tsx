@@ -62,8 +62,8 @@ export const CalendarTab = () => {
             <p className="text-[10px] md:text-xs font-bold text-deep/30 uppercase tracking-widest mt-1">Schedule Overview</p>
           </div>
           <div className="flex gap-2">
-            <button onClick={prevMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronLeft size={18} className="md:size-[20px]" /></button>
-            <button onClick={nextMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronRight size={18} className="md:size-[20px]" /></button>
+            <button onClick={prevMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronLeft className="size-[18px] md:size-5" /></button>
+            <button onClick={nextMonth} className="p-2 md:p-3 bg-bg-light hover:bg-primary hover:text-white rounded-xl md:rounded-2xl transition-all"><ChevronRight className="size-[18px] md:size-5" /></button>
           </div>
         </div>
 

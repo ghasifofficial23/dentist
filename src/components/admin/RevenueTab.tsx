@@ -33,7 +33,7 @@ const MetricCard = ({ label, value, change, isPositive }: { label: string, value
         "flex items-center gap-1 px-2 md:px-3 py-1 md:py-1.5 rounded-xl text-[8px] md:text-[10px] font-black uppercase shrink-0",
         isPositive ? "bg-emerald-50 text-emerald-500" : "bg-red-50 text-red-500"
       )}>
-        {isPositive ? <ArrowUpRight size={12} className="md:size-[14px]" /> : <ArrowDownRight size={12} className="md:size-[14px]" />}
+        {isPositive ? <ArrowUpRight className="size-3 md:size-3.5" /> : <ArrowDownRight className="size-3 md:size-3.5" />}
         {change}
       </div>
     </div>

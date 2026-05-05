@@ -122,10 +122,10 @@ export const PatientsTab = () => {
                             }}
                             className="p-2 md:p-3 bg-bg-light text-red-300 rounded-lg md:rounded-xl hover:bg-red-50 hover:text-red-500 transition-all"
                           >
-                             <Trash2 size={14} md:size-[16px]} />
+                             <Trash2 className="size-3.5 md:size-4" />
                           </button>
                           <button className="p-2 md:p-3 bg-bg-light text-deep/30 rounded-lg md:rounded-xl group-hover:bg-primary group-hover:text-white transition-all">
-                             <ChevronRight size={14} md:size-[16px]} />
+                             <ChevronRight className="size-3.5 md:size-4" />
                           </button>
                        </div>
                     </td>
