@@ -223,7 +223,7 @@ const Hero = () => {
         >
           <div className="relative z-10 glass p-4 rounded-[60px] border border-white/60 shadow-2xl">
             <div className="overflow-hidden rounded-[45px]">
-              <motion.img whileHover={{ scale: 1.05 }} transition={{ duration: 0.8 }} src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2070&auto=format&fit=crop" alt="Implant procedure" className="w-full aspect-[4/5] object-cover" />
+              <motion.img whileHover={{ scale: 1.05 }} transition={{ duration: 0.8 }} src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=75&w=1200&auto=format&fit=crop" alt="Implant procedure" className="w-full aspect-[4/5] object-cover" />
             </div>
             <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 1, duration: 0.8 }} className="absolute -bottom-6 -left-12 glass p-8 rounded-[40px] shadow-2xl max-w-[240px] border border-white/80 z-20">
               <p className="text-xs font-black text-primary mb-3 tracking-[0.2em] uppercase">Modern Care</p>

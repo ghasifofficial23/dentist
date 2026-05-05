@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { LandingPage } from './components/LandingPage';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { AdminLogin } from './components/admin/AdminLogin';
 import { useAdminStore } from './store/useAdminStore';
 import { supabase } from './lib/supabase';
+
+const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const AdminLogin = lazy(() => import('./components/admin/AdminLogin').then(m => ({ default: m.AdminLogin })));
+
+const LoadingFallback = () => (
+  <div className="min-h-screen bg-bg-light flex items-center justify-center">
+    <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 function App() {
   const { session, setSession } = useAdminStore();
@@ -32,7 +39,11 @@ function App() {
         {/* Admin Section */}
         <Route 
           path="/admin" 
-          element={session ? <AdminDashboard /> : <AdminLogin />} 
+          element={
+            <Suspense fallback={<LoadingFallback />}>
+              {session ? <AdminDashboard /> : <AdminLogin />}
+            </Suspense>
+          } 
         />
         
         {/* Redirect unknown routes */}
