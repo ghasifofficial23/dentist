@@ -31,15 +31,15 @@ export const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bg-light flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]" />
+    <div className="min-h-screen bg-bg-light flex items-center justify-center p-4 md:p-6 relative overflow-x-hidden">
+      {/* Background Decor - added pointer-events-none and adjusted for mobile */}
+      <div className="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-secondary/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         <div className="text-center mb-10">
           <div className="w-20 h-20 bg-white rounded-[32px] shadow-xl shadow-deep/5 flex items-center justify-center mx-auto mb-6 border border-deep/5">
@@ -49,7 +49,7 @@ export const AdminLogin = () => {
           <p className="text-sm font-bold text-deep/30 uppercase tracking-[0.2em]">Authorized Personnel Only</p>
         </div>
 
-        <div className="bg-white p-10 rounded-[48px] shadow-2xl shadow-deep/5 border border-deep/5">
+        <div className="bg-white p-6 md:p-10 rounded-[32px] md:rounded-[48px] shadow-2xl shadow-deep/5 border border-deep/5">
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
               <label className="text-[10px] font-black text-deep/30 uppercase tracking-widest pl-2">Email Address</label>
@@ -89,6 +89,8 @@ export const AdminLogin = () => {
             )}
 
             <button
+              id="login-submit"
+              type="submit"
               disabled={loading}
               className="w-full py-5 bg-deep text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-xl shadow-deep/10 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50"
             >
