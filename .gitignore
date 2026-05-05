@@ -10,7 +10,7 @@ coverage/
 # Temporary and AI-related files
 scratch/
 metadata.json
-"doctors image/"
+doctors\ image/
 .gemini/
 .planning/
 .vercel/
