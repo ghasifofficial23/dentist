@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useAdminStore } from '../store/useAdminStore';
+import { HeroShader } from './ui/HeroShader';
 
 // --- Types ---
 interface Service {
@@ -32,38 +33,6 @@ interface Service {
   description: string;
 }
 
-const LiquidBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          x: [0, 100, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-20%] right-[-10%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[120px] animate-morph"
-      />
-      <motion.div
-        animate={{
-          scale: [1.2, 1, 1.2],
-          x: [0, -100, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-secondary/15 rounded-full blur-[100px] animate-morph"
-      />
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.3, 0.1],
-          rotate: [0, 360],
-        }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 left-1/3 w-[50%] h-[50%] bg-accent/5 rounded-full blur-[140px] animate-morph"
-      />
-    </div>
-  );
-};
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -85,7 +54,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-[40px] ${scrolled ? 'glass py-3 shadow-2xl shadow-primary/10' : 'bg-transparent py-8'}`}>
+    <>
+    <nav className={cn(
+      "fixed top-4 left-4 right-4 z-[100] transition-all duration-500 rounded-[40px]",
+      scrolled ? "glass py-3 shadow-2xl shadow-primary/10" : "bg-transparent py-8"
+    )}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer group">
           <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-500">
@@ -135,14 +108,23 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+    </nav>
 
-      <AnimatePresence>
-        {mobileMenuOpen && (
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-white/20 backdrop-blur-xl z-[60] md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <motion.div 
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 glass shadow-2xl border border-white/40 rounded-[32px] md:hidden overflow-hidden"
+            className="fixed top-[110px] left-4 right-4 glass shadow-2xl border border-white/40 rounded-[32px] md:hidden overflow-hidden z-[70]"
           >
             <div className="flex flex-col p-8 gap-5">
               {navLinks.map((link) => (
@@ -164,16 +146,16 @@ const Navbar = () => {
               </a>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+        </>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-[100vh] flex items-center pt-32 pb-24 overflow-hidden bg-bg-light">
-      <LiquidBackground />
+    <section id="home" className="relative min-h-[100vh] flex items-center pt-40 lg:pt-32 pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 items-center gap-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -185,7 +167,7 @@ const Hero = () => {
             <Sparkles className="w-4 h-4" />
             Voted #1 Aesthetic Dental Clinic
           </div>
-          <h1 className="text-7xl lg:text-[100px] font-display font-black leading-[0.9] tracking-tighter text-deep mb-12">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[100px] font-display font-black leading-[1.1] md:leading-[0.9] tracking-tighter text-deep mb-8 md:mb-12">
             Exceptional <br />
             <span className="text-primary">Dental Care</span>
           </h1>
@@ -219,15 +201,15 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="lg:col-span-5 relative"
+          className="lg:col-span-5 relative mt-12 lg:mt-0"
         >
-          <div className="relative z-10 glass p-4 rounded-[60px] border border-white/60 shadow-2xl">
-            <div className="overflow-hidden rounded-[45px]">
+          <div className="relative z-10 glass p-3 md:p-4 rounded-[40px] md:rounded-[60px] border border-white/60 shadow-2xl">
+            <div className="overflow-hidden rounded-[30px] md:rounded-[45px]">
               <motion.img whileHover={{ scale: 1.05 }} transition={{ duration: 0.8 }} src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=75&w=1200&auto=format&fit=crop" alt="Implant procedure" className="w-full aspect-[4/5] object-cover" />
             </div>
-            <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 1, duration: 0.8 }} className="absolute -bottom-6 -left-12 glass p-8 rounded-[40px] shadow-2xl max-w-[240px] border border-white/80 z-20">
-              <p className="text-xs font-black text-primary mb-3 tracking-[0.2em] uppercase">Modern Care</p>
-              <p className="text-base font-bold text-deep leading-relaxed">"Designed for comfort, care, and confidence."</p>
+            <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 1, duration: 0.8 }} className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-12 glass p-5 md:p-8 rounded-[24px] md:rounded-[40px] shadow-2xl max-w-[200px] md:max-w-[240px] border border-white/80 z-20">
+              <p className="text-[10px] font-black text-primary mb-2 md:mb-3 tracking-[0.2em] uppercase">Modern Care</p>
+              <p className="text-sm md:text-base font-bold text-deep leading-relaxed">"Designed for comfort, care, and confidence."</p>
             </motion.div>
           </div>
           <motion.div animate={{ y: [0, -25, 0], rotate: [0, 5, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-16 -right-12 w-40 h-40 bg-white/40 backdrop-blur-xl rounded-full shadow-2xl flex items-center justify-center p-8 z-30 border border-white/50 hidden xl:flex">
@@ -265,7 +247,7 @@ const ServicesAndCalculator = () => {
   }, 0);
 
   return (
-    <section id="services" className="py-24 bg-white relative overflow-hidden">
+    <section id="services" className="py-24 bg-white/50 backdrop-blur-xl relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div>
@@ -346,7 +328,7 @@ const BeforeAfter = () => {
   };
 
   return (
-    <section id="transformations" className="py-32 bg-white relative">
+    <section id="transformations" className="py-32 bg-white/50 backdrop-blur-xl relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px]">Transformations</span>
@@ -411,10 +393,15 @@ const Testimonials = () => {
     { name: 'Fatima Mohamed', role: 'Blogger', rating: 5.0, text: "The atmosphere is more like a spa than a dentist. So calm and beautiful. My teeth look amazing!", logo: 'https://cdn-icons-png.flaticon.com/512/5968/5968852.png' },
   ];
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-white/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-display font-bold text-deep">Our trusted <span className="px-6 py-2 bg-primary text-white rounded-2xl shadow-xl shadow-primary/20">Clients</span></h2>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-deep leading-tight">
+            Our trusted <br className="sm:hidden" />
+            <span className="inline-block px-4 py-1 md:px-6 md:py-2 bg-primary text-white rounded-xl md:rounded-2xl shadow-xl shadow-primary/20 mt-2 sm:mt-0">
+              Clients
+            </span>
+          </h2>
           <p className="max-w-xl mx-auto text-deep/50 mt-8 font-medium text-lg leading-relaxed">Our mission is to drive progress and enhance the lives of our customers by delivering superior products and services.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -439,14 +426,14 @@ const Testimonials = () => {
 
 const DoctorProfile = () => {
   return (
-    <section id="doctor" className="relative min-h-screen flex items-center bg-white overflow-hidden pt-20 pb-0">
+    <section id="doctor" className="relative min-h-screen flex items-center bg-white/50 backdrop-blur-xl overflow-hidden pt-20 pb-0">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] z-0">
         <h2 className="text-[40vw] font-display font-black leading-none tracking-tighter whitespace-nowrap">NOVA</h2>
       </div>
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 items-center gap-12 relative z-10 w-full">
         <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} className="max-w-xl">
           <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-6 block">Meet the Specialist</span>
-          <h2 className="text-6xl md:text-8xl font-display font-black text-deep leading-tight mb-8">Precision Meets <br /><span className="text-primary">Artistry.</span></h2>
+          <h2 className="text-4xl sm:text-6xl md:text-8xl font-display font-black text-deep leading-tight mb-8">Precision Meets <br /><span className="text-primary">Artistry.</span></h2>
           <p className="text-deep/50 text-xl leading-relaxed mb-12 font-medium">Dr. Julian Nova blends scientific precision with artistic vision to craft bespoke smiles that are as unique as they are perfect.</p>
           <div className="grid grid-cols-1 gap-6 mb-12">
             {[
@@ -544,7 +531,7 @@ const BookingForm = () => {
         <div className="grid lg:grid-cols-2 gap-20">
           <div className="text-white">
             <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px]">Get in touch</span>
-            <h2 className="text-5xl md:text-7xl font-display font-black mt-4 mb-8 leading-tight">Your new smile <br /><span className="text-primary">starts here.</span></h2>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black mt-4 mb-8 leading-tight">Your new smile <br /><span className="text-primary">starts here.</span></h2>
             <p className="text-white/40 text-lg mb-12 max-w-md">Contact our specialist team to book your initial consultation and take the first step towards dental perfection.</p>
             <div className="space-y-8">
               <div className="flex items-center gap-6"><div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center"><Phone className="text-primary" /></div><div><p className="text-xs text-white/40 font-bold uppercase tracking-widest mb-1">Call us directly</p><p className="text-xl font-bold">+1 (555) 888 2000</p></div></div>
@@ -584,7 +571,7 @@ const BookingForm = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-24 pb-12 border-t border-gray-100">
+    <footer className="bg-white/50 backdrop-blur-xl pt-24 pb-12 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 lg:col-span-1">
@@ -612,15 +599,20 @@ const Footer = () => {
 
 export const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-bg-light font-sans selection:bg-primary/20 selection:text-primary">
-      <Navbar />
-      <Hero />
-      <ServicesAndCalculator />
-      <BeforeAfter />
-      <Testimonials />
-      <DoctorProfile />
-      <BookingForm />
-      <Footer />
+    <div className="min-h-screen bg-bg-light font-sans selection:bg-primary/20 selection:text-primary relative">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <HeroShader veilOpacity="bg-white/60" speed={0.2} />
+      </div>
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <ServicesAndCalculator />
+        <BeforeAfter />
+        <Testimonials />
+        <DoctorProfile />
+        <BookingForm />
+        <Footer />
+      </div>
     </div>
   );
 };
